@@ -1,10 +1,10 @@
-# waitung-agent-traffic-measurement
+# codex_qwen
 
 公共测量框架：Agent 网络流量的双端采集、解析、事件关联与分析。
 
 本仓库是 **Agent Traffic Measurement** 研究项目的测量底座，本身不绑定任何
 单一 Benchmark。工作负载（GAIA、HumanEval 或未来新增的 Benchmark）由
-`waitung-agent-workload-runners` 仓库驱动，通过 SSH 调用本仓库的模型侧采集契约。
+`codex_qwen_GAIA` 仓库驱动，通过 SSH 调用本仓库的模型侧采集契约。
 
 ## 职责
 
@@ -48,10 +48,10 @@ python -m unittest discover -s tests -p 'test_*.py'
 ## 依赖关系
 
 ```text
-waitung-agent-workload-runners   (启动 Codex、调度任务、调用双端采集)
+codex_qwen_GAIA   (启动 Codex、调度任务、调用双端采集)
               |
               v
-waitung-agent-traffic-measurement  (本仓库：PCAP/HTTP/SSE/TCP/Prometheus 解析)
+codex_qwen  (本仓库：PCAP/HTTP/SSE/TCP/Prometheus 解析)
               |
               v
 waitung-inference-server-measurement  (vLLM 插桩与采集 worker，产出 V3 telemetry)

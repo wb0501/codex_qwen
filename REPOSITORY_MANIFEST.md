@@ -1,8 +1,8 @@
-# REPOSITORY_MANIFEST — waitung-agent-traffic-measurement
+# REPOSITORY_MANIFEST — codex_qwen
 
 公共测量框架：Agent 网络流量的双端采集、解析、事件关联与分析。
 
-- Repository: `waitung-agent-traffic-measurement`
+- Repository: `codex_qwen`
 - Local path: `/home/codex_qwen`
 - Baseline commit: 见提交信息与 `git log --oneline -1`
 - Python: 3.13 / 3.14（本机基线 3.14.4）
@@ -30,10 +30,10 @@
 ## 依赖关系
 
 ```text
-waitung-agent-workload-runners     启动 Codex、调度任务、发起双端采集
+codex_qwen_GAIA     启动 Codex、调度任务、发起双端采集
               |  ssh spk + JSON 协议
               v
-waitung-agent-traffic-measurement  本仓库：PCAP/HTTP/SSE/TCP/Prometheus 解析与关联
+codex_qwen  本仓库：PCAP/HTTP/SSE/TCP/Prometheus 解析与关联
               |  导入 V3 telemetry 格式
               v
 waitung-inference-server-measurement  vLLM 插桩、spark_capture worker、watchdog
