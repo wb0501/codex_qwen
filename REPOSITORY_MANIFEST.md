@@ -27,18 +27,6 @@
 | `config/spark/config.toml`, `config/spark/model_catalog.json` | 推理服务 Provider 与模型 catalog 模板（无密钥） | — |
 | `README-spark-measurement.md`, `README.md`, `deployment/formal-verification.md` | 技术文档 | — |
 
-## 依赖关系
-
-```text
-codex_qwen_GAIA     启动 Codex、调度任务、发起双端采集
-              |  ssh spk + JSON 协议
-              v
-codex_qwen  本仓库：PCAP/HTTP/SSE/TCP/Prometheus 解析与关联
-              |  导入 V3 telemetry 格式
-              v
-waitung-inference-server-measurement  vLLM 插桩、spark_capture worker、watchdog
-```
-
 - 本仓库 `scripts/server/*.py` 是 server 仓库对应文件的原样副本（SHA256 见下），用于离线测试。
 - `tests/test_v3.py` / `tests/test_unified.py` 中的 overlay 校验用例需要
   `vllm_overlay/`（补丁与插桩文件，权威在 server 仓库）和 `vllm_baseline/`
@@ -73,3 +61,12 @@ Codex CLI       : 0.169.0
 Python          : 3.14.4（本机 WSL）
 采集工具        : tshark / dumpcap
 ```
+## 独立关系（2026-11-26 修订）
+
+codex_qwen 与 codex_qwen_GAIA 并列，均通过 ssh spk 调用服务端：
+
+codex_qwen       --> ssh spk --> waitung-inference-server-measurement
+codex_qwen_GAIA  --> ssh spk --> waitung-inference-server-measurement
+
+两者之间没有 Python import 依赖。scripts/server/*.py 仅用于本仓库离线测试，
+权威副本仍在服务端仓库。

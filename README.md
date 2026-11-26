@@ -45,19 +45,16 @@ python -m unittest discover -s tests -p 'test_*.py'
 
 采集与解析的具体入口见 `REPOSITORY_MANIFEST.md`。
 
-## 依赖关系
-
-```text
-codex_qwen_GAIA   (启动 Codex、调度任务、调用双端采集)
-              |
-              v
-codex_qwen  (本仓库：PCAP/HTTP/SSE/TCP/Prometheus 解析)
-              |
-              v
-waitung-inference-server-measurement  (vLLM 插桩与采集 worker，产出 V3 telemetry)
-```
-
 ## 数据策略
 
 数据集、实验产物、PCAP、telemetry 运行数据、私钥与运行时状态
 全部由 `.gitignore` 排除，不进入版本管理。
+## 独立关系（2026-11-26 修订，取代上方旧依赖图）
+
+codex_qwen 与 codex_qwen_GAIA 是两个独立 workload：
+
+- codex_qwen：HumanEval + 可复用测量框架
+- codex_qwen_GAIA：GAIA + 自带测量副本
+
+两者均通过 ssh spk 调用 waitung-inference-server-measurement 的 spark_capture.py，
+不互相 import；服务端也不 import 任何一个客户端仓库。
