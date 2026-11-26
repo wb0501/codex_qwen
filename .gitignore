@@ -1,0 +1,65 @@
+# --- Agent traffic measurement: excluded artifacts -------------------------
+# Datasets and experiment outputs must never be committed.
+DATASET/
+results_codex_humaneval/
+results_*/
+*.pcap
+*.pcapng
+*.jsonl
+*_timeline.jsonl
+result.json
+*.log
+
+# Virtual environments and caches
+.venv/
+.venv-vllm/
+site-packages/
+__pycache__/
+*.py[cod]
+.cache/
+.build/
+dist/
+build/
+*.egg-info/
+
+# Runtime state, credentials, and private material
+.runtime/
+.private/
+*.pem
+*_identity
+*_identity.pub
+id_rsa*
+known_hosts
+.env
+.env.*
+auth.json
+config/ssh_config
+config/**/auth.json
+
+# Deployment archives and snapshots
+deployment/before-*/
+deployment/before_unified_*/
+deployment/probe-archives/
+deployment/review-packages/
+deployment/safety-*/
+deployment/*.json
+exports/
+*.zip
+*.tar.gz
+*.tgz
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Verified-deployment snapshot: embedding of runtime results and telemetry
+# collections is excluded; only its README is tracked (added explicitly).
+deployment/deployment_verified/deployed_code/
+deployment/deployment_verified/results/
+deployment/deployment_verified/ss_samples/
+
+# Sibling-repository sources are not duplicated here.
+config/ssh_config
+config/ssh_config.example
